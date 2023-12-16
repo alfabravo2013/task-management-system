@@ -7,6 +7,7 @@
 - Spring Boot 3.2.0
 - Spring Data JPA
 - PostgreSQL 14.8
+- Flyway для миграции
 - Testcontainers для интеграционных тестов
 - Springdoc для автоматического документирования API
 
