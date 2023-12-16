@@ -40,7 +40,7 @@ public class CommentRestController {
         this.commentToCommentDtoMapper = commentToCommentDtoMapper;
     }
 
-    @Operation(description = "Публикация нового комментария к задаче")
+    @Operation(summary = "Публикация нового комментария к задаче")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Комментарий опубликован"),
             @ApiResponse(responseCode = "400", description = "Пустой текст комментария",
@@ -61,7 +61,7 @@ public class CommentRestController {
         commentService.createComment(taskId, request);
     }
 
-    @Operation(description = "Получения постраничного списка комментариев к задаче")
+    @Operation(summary = "Получения постраничного списка комментариев к задаче")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Запрос выполнен",
                     content = @Content(schema = @Schema(implementation = CommentsPageResponse.class))),
