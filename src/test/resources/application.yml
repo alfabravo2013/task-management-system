@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:14.8-alpine:///taskmanagementdb
+    username: devuser
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+access-token:
+  ttl: 86400
