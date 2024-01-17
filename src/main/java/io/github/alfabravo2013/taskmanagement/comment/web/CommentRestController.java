@@ -75,7 +75,7 @@ public class CommentRestController {
     @GetMapping(path = "/{taskId}/comments")
     public ResponseEntity<CommentsPageResponse> getTaskComments(
             @Parameter(description = "Уникальный идентификатор задачи")
-            @PathVariable Long taskId,
+            @PathVariable(name = "taskId") Long taskId,
 
             @Parameter(description = "Номер страницы")
             @Min(value = 1, message = "Номер страницы не может быть меньше 1")
