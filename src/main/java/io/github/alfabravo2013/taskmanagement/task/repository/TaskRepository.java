@@ -18,11 +18,10 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
                 t.priority AS taskpriority,
                 t.author_id AS taskauthorid,
                 t.assignee_id AS taskassigneeid,
-                count (c.id) AS taskcommentscount
+                (SELECT count (*) AS taskcommentscount FROM comments AS c WHERE c.task_id = t.id)
             FROM tasks AS t
-            LEFT JOIN comments AS c ON c.task_id = t.id
             GROUP BY taskid, tasktitle, taskdescription, taskauthorid, taskstatus,
-                     taskpriority, taskassigneeid
+                      taskpriority, taskassigneeid
             """, nativeQuery = true)
     Page<TaskView> findAllTaskViews(Pageable pageable);
 
@@ -35,12 +34,11 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
                 t.priority AS taskpriority,
                 t.author_id AS taskauthorid,
                 t.assignee_id AS taskassigneeid,
-                count (c.id) AS taskcommentscount
+                (SELECT count (*) AS taskcommentscount FROM comments AS c WHERE c.task_id = t.id)
             FROM tasks AS t
-            LEFT JOIN comments AS c ON c.task_id = t.id
             WHERE t.author_id = :authorId
             GROUP BY taskid, tasktitle, taskdescription, taskauthorid, taskstatus,
-                     taskpriority, taskassigneeid, t.created_at
+                     taskpriority, taskassigneeid
             """, nativeQuery = true)
     Page<TaskView> findTaskViewsByAuthorId(Long authorId, Pageable pageable);
 
@@ -53,9 +51,8 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
                 t.priority AS taskpriority,
                 t.author_id AS taskauthorid,
                 t.assignee_id AS taskassigneeid,
-                count (c.id) AS taskcommentscount
+                (SELECT count (*) AS taskcommentscount FROM comments AS c WHERE c.task_id = t.id)
             FROM tasks AS t
-            LEFT JOIN comments AS c ON c.task_id = t.id
             WHERE t.assignee_id = :assigneeId
             GROUP BY taskid, tasktitle, taskdescription, taskauthorid, taskstatus,
                      taskpriority, taskassigneeid
